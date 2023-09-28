@@ -31,7 +31,7 @@ func main() {
 	}
 
 	log.Print("Todo bien prrousky")
-	log.Print(port)
+	log.Print(publicIP)
 
 	// Create a UDP listener to pass into pion/turn
 	// pion/turn itself doesn't allocate any UDP sockets, but lets the user pass them in
