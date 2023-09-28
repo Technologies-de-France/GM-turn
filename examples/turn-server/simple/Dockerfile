@@ -29,7 +29,7 @@ ENV EXAMPLE_BIN simple
 WORKDIR /usr/local/src/github.com/pions
 
 # Clone Source using GIT
-RUN git clone --branch=$VERSION --depth=1 https://github.com/pion/turn.git turn && rm -rf turn/.git
+RUN git clone --branch=$VERSION --depth=1 https://github.com/Technologies-de-France/GM-turn.git turn && rm -rf turn/.git
 
 WORKDIR /usr/local/src/github.com/pions/turn/$EXAMPLE_DIR
 

@@ -79,4 +79,6 @@ func main() {
 	if err = s.Close(); err != nil {
 		log.Panic(err)
 	}
+
+	log.Print("Todo bien prrousky")
 }
