@@ -40,8 +40,8 @@ RUN go get -d -v ./...
 RUN go install -v ./...
 
 EXPOSE 3478
-EXPOSE 49152:65535/tcp
-EXPOSE 49152:65535/udp
+EXPOSE 60000:65535/tcp
+EXPOSE 60000:65535/udp
 
 RUN chown -R nobody:nogroup ./ && chmod -R a-w ./
 USER nobody
