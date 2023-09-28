@@ -30,6 +30,8 @@ func main() {
 		log.Fatalf("'users' is required")
 	}
 
+	log.Print("Todo bien prrousky")
+
 	// Create a UDP listener to pass into pion/turn
 	// pion/turn itself doesn't allocate any UDP sockets, but lets the user pass them in
 	// this allows us to add logging, storage or modify inbound/outbound traffic
@@ -80,5 +82,5 @@ func main() {
 		log.Panic(err)
 	}
 
-	log.Print("Todo bien prrousky")
+	
 }
