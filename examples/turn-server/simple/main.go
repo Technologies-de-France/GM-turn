@@ -41,6 +41,12 @@ func main() {
 		log.Panicf("Failed to create TURN server listener: %s", err)
 	}
 
+	tcpListener, err1 := net.Listen("tcp4", "0.0.0.0:"+strconv.Itoa(*port))
+	if err1 != nil {
+		log.Panicf("Failed to create TURN server listener: %s", err1)
+	}
+
+
 	// Cache -users flag for easy lookup later
 	// If passwords are stored they should be saved to your DB hashed using turn.GenerateAuthKey
 	usersMap := map[string][]byte{}
@@ -63,14 +69,23 @@ func main() {
 		PacketConnConfigs: []turn.PacketConnConfig{
 			{
 				PacketConn: udpListener,
-				RelayAddressGenerator: &turn.RelayAddressGeneratorPortRange{
+				RelayAddressGenerator: &turn.RelayAddressGeneratorStatic{
 					RelayAddress: net.ParseIP(*publicIP), // Claim that we are listening on IP passed by user (This should be your Public IP)
 					Address:      "0.0.0.0",              // But actually be listening on every interface
-					MinPort:      50000,
-					MaxPort:      50500,
+					
 				},
 			},
 		},
+		ListenerConfigs: []turn.ListenerConfig{
+			{
+				Listener: tcpListener,
+				RelayAddressGenerator: &turn.RelayAddressGeneratorStatic{
+					RelayAddress: net.ParseIP(*publicIP),
+					Address:      "0.0.0.0",
+				},
+			},
+		},
+
 	})
 	if err != nil {
 		log.Panic(err)
